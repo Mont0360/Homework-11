@@ -1,0 +1,26 @@
+{
+  "name": "homework-11",
+  "version": "1.0.0",
+  "description": "## Description",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "uuid": "^8.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mont0360/Homework-11.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mont0360/Homework-11/issues"
+  },
+  "homepage": "https://github.com/Mont0360/Homework-11#readme"
+}
