@@ -20,6 +20,49 @@ app.get("/api/notes", function(req, res){
     res.sendFile(path.join(__dirname, "/db/db.json"));
 });
 
+app.post("/api/notes", function(req, res) {
+
+    let newNote = req.body;
+    let databasepath = path.join(__dirname, "db/db.json");
+    fs.readFile(databasepath, "utf8", function (err, data) {
+        if (err) throw err;
+        let currentData = JSON.parse(data);
+        newNote.id = currentData.length + newNote.title;
+        currentData.push(newNote);
+        let addData = JSON.stringify(currentData);
+        fs.writeFile(databasepath, addData, function (err){
+            if (err) throw err;
+        });
+    })
+    res.sendFile(path.join(__dirname, "/public/notes.html"));
+});
+
+app.delete("/api/notes/:id", function(req, res) {
+
+    console.log("Deleting note from file");
+    res.sendFile(path.join(__dirname, "public/notes.html"));
+
+    let noteId = req.params.id;
+    let databasepath = path.join(__dirname, "db/db.json");
+
+    fs.readFile(databasepath, "utf8", function(err, data) {
+        if (err) throw err;
+        let currentData = JSON.parse(data);
+        for (let i = 0; i < currentData.length; i++) {
+            if (currentData[i].id === noteId) {
+                currentData.splice(i, 1)
+            }
+        }
+        let update = JSON.stringify(currentData);
+        fs.writeFile(databasepath, update, function (err) {
+          if (err) throw err;
+    })
+
+});
+
+res.sendFile(path.join(__dirname, "public/notes.html"));
+});
+
 app.listen(PORT, function() {
     console.log("App listening on PORT: " + PORT);
   });
